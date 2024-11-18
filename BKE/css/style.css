@@ -3,5 +3,17 @@
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 100px 100px 100px;
   gap: 5px;
-  background-color: black;
+  margin: 0 auto;
+  width: fit-content;
+  
+ }
+.vakje{
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: 10px solid green;
+    display: flex;
+}
+.image{
+
 }
