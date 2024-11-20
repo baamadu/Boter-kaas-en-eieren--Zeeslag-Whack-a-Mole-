@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: green;
+}
+
+.speelbord {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 15px;
+}
+
+.circle {
+    background-color: rgb(80, 35, 14);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
