@@ -1,3 +1,4 @@
+
 .spelbord {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -9,7 +10,9 @@
   padding: 1px;
   width: 50vmin;
   margin: 0 auto;
+  position: relative;
 }
+
 
 .box {
   display: flex;
@@ -63,9 +66,9 @@
 }
 
 .booten-container2 {
-  position: absolute; /* Zet de boten naast het bord */
-  top: 20px; /* Zorgt voor wat ruimte boven het bord */
-  right: 65%; /* Plaatst de container rechts van het bord */
+  position: absolute; 
+  top: 20px; 
+  right: 65%; 
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -92,14 +95,28 @@
 }
 
 .boot-image2 {
-  max-width: 100%; /* Zorg ervoor dat de afbeelding niet groter is dan de breedte van het element */
-  height: auto; /* Zorg ervoor dat de hoogte proportioneel is */
-  width: 40%; /* Pas de breedte van de afbeelding aan */
+  max-width: 100%; 
+  height: auto; 
+  width: 40%; 
 }
 
-/* Styling voor wanneer je met de muis over de boot hovert */
+.boot-image3 {
+  max-width: 100%; 
+  height: auto; 
+  width: 20%; 
+}
+
+
 .bootje2:hover {
   transform: scale(1.1);
+}
+
+.b-image {
+  position:fixed;
+  width: 100vw;
+  height: 10vw;
+  object-fit: cover;
+  z-index: 0;
 }
 
 
@@ -264,4 +281,12 @@
   .box:nth-child(40) {
     background-color: rgb(23, 165, 217);
     color: white;
+  }
+
+  .b-image {
+    position: fixed;
+    width: 100vw;
+    height: 100dvh;
+    object-fit: cover;
+    z-index: -1;
   }
