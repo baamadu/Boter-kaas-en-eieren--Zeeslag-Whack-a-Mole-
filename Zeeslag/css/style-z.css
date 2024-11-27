@@ -4,7 +4,6 @@
   grid-template-rows: repeat(8, 1fr);
   gap: 1px;
   border: 4px solid black;
-
   color: teal;
   font-size: 150%;
   padding: 1px;
@@ -22,6 +21,87 @@
   aspect-ratio: 1;
   background-color: #f0f0f0;
 }
+
+.booten-container {
+  position: absolute; 
+  top: 20px;
+  left: 65%; 
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.bootje {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(23, 165, 217);
+  color: white;
+  border: 2px solid #333;
+  cursor: pointer;
+  width: 80%;
+  text-align: center;
+  height: 50px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.bootje[draggable="true"] {
+  cursor: move;
+}
+
+.boot-image {
+  max-width: 100%; 
+  height: auto; 
+  width: 40%; 
+}
+
+
+.bootje:hover {
+  transform: scale(1.1);
+}
+
+.booten-container2 {
+  position: absolute; /* Zet de boten naast het bord */
+  top: 20px; /* Zorgt voor wat ruimte boven het bord */
+  right: 65%; /* Plaatst de container rechts van het bord */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+.bootje2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(23, 165, 217);
+  color: white;
+  border: 2px solid #333;
+  cursor: pointer;
+  width: 80%;
+  text-align: center;
+  height: 50px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.bootje2[draggable="true"] {
+  cursor: move;
+}
+
+.boot-image2 {
+  max-width: 100%; /* Zorg ervoor dat de afbeelding niet groter is dan de breedte van het element */
+  height: auto; /* Zorg ervoor dat de hoogte proportioneel is */
+  width: 40%; /* Pas de breedte van de afbeelding aan */
+}
+
+/* Styling voor wanneer je met de muis over de boot hovert */
+.bootje2:hover {
+  transform: scale(1.1);
+}
+
 
 .box:nth-child(1) {
   background-color: rgb(23, 165, 217);
@@ -184,36 +264,4 @@
   .box:nth-child(40) {
     background-color: rgb(23, 165, 217);
     color: white;
-  }
-.booten-container{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  /* Stijl voor de boten */
-  .boot {
-    display: flex;
-    justify-content: center;
-    align-items: 20;
-    padding: 10px;
-    background-color: rgb(23, 165, 217);
-    color: white;
-    border: 2px solid #333;
-    cursor: pointer;
-    width: 80%; /* Boot is kleiner dan het bord */
-    text-align: center;
-    height: 50px; /* Boten hoogte */
-  }
-  
-  /* Maak de boten half zo groot als de vakjes op het bord */
-  .boot {
-    width: 80%;
-    height: 50px;
-  }
-  
-  /* Maak de boten draggable */
-  .boot[draggable="true"] {
-    cursor: move;
   }
