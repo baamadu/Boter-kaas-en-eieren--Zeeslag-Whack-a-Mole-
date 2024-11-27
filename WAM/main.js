@@ -39,7 +39,18 @@ function showMole() {
     mole.classList.add('mole');
     randomCircle.appendChild(mole);
 
+    //timer
+    const randomTime = Math.floor(Math.random() * 2000) + 1000;
+
+    setTimer(() => {
+        randomCircle.removeChild(mole);
+    }, randomTime);
 }
+
+setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
+
+
+
 
 
 
