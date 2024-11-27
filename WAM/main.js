@@ -10,6 +10,7 @@ circles.forEach(function(circle) {
             console.log('Deze cirkel is al gevuld');
         }
         
+        //controleert of er een mol op het veld staat
         if (circle.classList.contains('mole')) {
             console.log('Je hebt de mol geraakt');
         } else {
@@ -24,6 +25,16 @@ circles.forEach(function(circle) {
         console.log('Veld gevuld!');
     });
 });
+
+//functie om een willekeurige hol te kiezen
+function getRandomCircle() {
+    const randomIndex = math.floor(Math.random()* circles.lenght);
+    return circles[randomIndex];    
+}
+
+
+
+
 
 
 
