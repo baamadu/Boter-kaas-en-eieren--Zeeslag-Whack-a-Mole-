@@ -32,6 +32,14 @@ function getRandomCircle() {
     return circles[randomIndex];    
 }
 
+//functie om de mol te laten verschijnen
+function showMole() {
+    const randomCircle = getRandomCircle();
+    const mole = document.createElement('div');
+    mole.classList.add('mole');
+    randomCircle.appendChild(mole);
+
+}
 
 
 
