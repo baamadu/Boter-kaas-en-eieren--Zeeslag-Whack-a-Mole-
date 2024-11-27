@@ -1,3 +1,5 @@
-const circles = document.querySelector('.circle')
+const circles = document.querySelectorAll('.circle')
 
-circles.forEach(function(value, index))
+circles.forEach((circle, i) => {
+    console.log(`Circle ${i + 1}:`, circle);
+});
