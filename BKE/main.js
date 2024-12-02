@@ -1,12 +1,16 @@
 console.log("Main loaded");
+
 // Haal alle vakken op met querySelectorAll
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
- 
+
 const xVakjes = [];
 const oVakjes = [];
- 
-currentPlayer = "X";
+let currentPlayer = "X"; // Voeg `let` toe om variabele te declareren
+
+const messageBox = document.querySelector(".messageBox"); // Punt toegevoegd om de class te selecteren
+
+
 for (let i = 0; i < vakjes.length; i++) {
   const vakje = vakjes[i];
   vakje.addEventListener("click", function () {
@@ -17,45 +21,64 @@ for (let i = 0; i < vakjes.length; i++) {
       } else {
         oVakjes.push(i);
       }
-      checkIfWinner();
+      if (checkIfWinner()) {
+        return; // Stop verdere zetten als er een winnaar is
+      }
+      if (checkDraw()) {
+        showMessage("Gelijkspel!");
+        return; // Stop verdere zetten als er een gelijkspel is
+      }
       currentPlayer = currentPlayer === "X" ? "O" : "X";
     }
   });
 }
- 
+
 function checkIfWinner() {
   let vakjes;
- 
+
   if (currentPlayer === "X") {
     vakjes = xVakjes;
   } else {
     vakjes = oVakjes;
   }
- 
+
   for (let i = 0; i < winningCombinations.length; i++) {
-    // bijvoorbeeld: [0,1,2]
     const winningCombo = winningCombinations[i];
- 
-    // houdt bij of de speler gewonnen heeft.
-    // wordt false zodra een van de combo nummbers niet in de vakjes array zit
     let playerHasWon = true;
- 
+
     for (let j = 0; j < winningCombo.length; j++) {
-      // bijvoorbeeld 0 of 1 of 2
       const winningNumber = winningCombo[j];
- 
-      // kijk of het nummber uit de winnende combo in de array van de huidige player zijn vakjes zit
       const hasWinningNumber = vakjes.includes(winningNumber);
- 
-      if (hasWinningNumber == false) {
+
+      if (!hasWinningNumber) {
         playerHasWon = false;
       }
     }
- 
-    console.log("Player", currentPlayer, "has won", playerHasWon);
+    
+    if (playerHasWon) {
+      showMessage("Player " + currentPlayer + " has won!");
+      return true; // Er is een winnaar gevonden
+    }
   }
+
+  return false; // Geen winnaar gevonden
 }
- 
+
+function checkDraw() {
+  // Als alle vakjes bezet zijn en er geen winnaar is
+  for (let i = 0; i < vakjes.length; i++) {
+    if (vakjes[i].textContent === "") {
+      return false; // Er zijn nog lege vakjes
+    }
+  }
+  return true; // Geen lege vakjes meer, dus gelijkspel
+}
+
+function showMessage(message) {
+  messageBox.textContent = message;
+  messageBox.style.display = "block";
+}
+
 const winningCombinations = [
   [0, 1, 2], // Rij 1: vakje 1, vakje 2, vakje 3
   [3, 4, 5], // Rij 2: vakje 4, vakje 5, vakje 6
@@ -66,20 +89,5 @@ const winningCombinations = [
   [0, 4, 8], // Diagonaal 1: vakje 1, vakje 5, vakje 9
   [2, 4, 6], // Diagonaal 2: vakje 3, vakje 5, vakje 7
 ];
-
-
-const playerOne = {
-  name: 'Amadu',
-  age: 17,
-  points: 0
-};
-
-// Zet de spelergegevens om naar JSON en sla ze op in localStorage
-function savePlayerData(player) {
-  const playerJSON = JSON.stringify(player);
-  localStorage.setItem('playerOne', playerJSON);
-}
-
-
 
 
