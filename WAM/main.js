@@ -1,4 +1,19 @@
 const circles = document.querySelectorAll('.circle');
+const messageBox = document.getElementById('messageBox');
+const scoreDisplay = document.getElementById('scoreDisplay');
+let score = 0;
+
+function showMessage(message) {
+    messageBox.textContent = `$(message) Score: ${score}`;
+    messageBox.style.display = 'block';
+    setTimeout(() => {
+        messageBox.style.display = 'none';
+    }, 3000);
+}
+
+function updateScoreDisplay() {
+    scoreDisplay.textContent = `Score: $(score)`;
+}
 
 // Loop through circles to attach event listeners
 circles.forEach((circle, i) => {
@@ -20,7 +35,7 @@ circles.forEach(function(circle) {
             console.log('Geen mol in dit veld');
         }
 
-        // Mark the circle as filled
+        // The circel is filled
         circle.classList.add('filled');
 
         // If a mole was hit
@@ -55,18 +70,3 @@ function showMole() {
 
 // Call showMole at random intervals
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
