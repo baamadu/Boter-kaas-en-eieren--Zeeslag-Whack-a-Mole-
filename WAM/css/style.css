@@ -6,6 +6,7 @@ body {
     height: 100vh;
     margin: 0;
     background-color: #4CAF50;
+    flex-direction: column;
 }
 
 .message-box {
@@ -50,4 +51,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
+}
+
+.score {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 20px;
 }
