@@ -3,6 +3,16 @@ const messageBox = document.getElementById('messageBox');
 const scoreDisplay = document.getElementById('scoreDisplay');
 let score = 0;
 
+function askName() {
+    const name = prompt("Wat is je naam?");
+    if (name) {
+      alert("Welkom, " + name + "!");
+    } else {
+      alert("Je hebt geen naam ingevuld");
+    }
+  }
+  askName();
+
 function showMessage(message) {
     messageBox.textContent = `$(message) Score: ${score}`;
     messageBox.style.display = 'block';
@@ -15,7 +25,6 @@ function updateScoreDisplay() {
     scoreDisplay.textContent = `Score: $(score)`;
 }
 
-// Loop through circles to attach event listeners
 circles.forEach((circle, i) => {
     console.log(`Circle ${i + 1}:`, circle);
 });
@@ -25,7 +34,7 @@ circles.forEach(function(circle) {
         // Check if the circle is already filled
         if (circle.classList.contains('filled')) {
             console.log('Deze cirkel is al gevuld');
-            return; // Prevent further actions
+            return;
         }
 
         // Check if a mole is on the field
@@ -35,7 +44,6 @@ circles.forEach(function(circle) {
             console.log('Geen mol in dit veld');
         }
 
-        // The circel is filled
         circle.classList.add('filled');
 
         // If a mole was hit
@@ -68,5 +76,4 @@ function showMole() {
     }, randomTime);
 }
 
-// Call showMole at random intervals
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
