@@ -1,93 +1,129 @@
 console.log("Main loaded");
 
-// Haal alle vakken op met querySelectorAll
+
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
 
-const xVakjes = [];
-const oVakjes = [];
-let currentPlayer = "X"; // Voeg `let` toe om variabele te declareren
+let currentPlayer = "X"; // Speler X begint
 
-const messageBox = document.querySelector(".messageBox"); // Punt toegevoegd om de class te selecteren
+
+let playerScore = localStorage.getItem("playerScore")
+  ? parseInt(localStorage.getItem("playerScore"))
+  : 0;
+let computerScore = localStorage.getItem("computerScore")
+  ? parseInt(localStorage.getItem("computerScore"))
+  : 0;
+
+
+const playerScoreElement = document.querySelector("#player-score");
+const computerScoreElement = document.querySelector("#computer-score");
+const messageBox = document.querySelector(".messageBox"); 
+
+// Toon de score op basis van localStorage
+updateScoreDisplay();
+
+
+document.querySelector(".start-button").addEventListener("click", startGame);
+document.querySelector(".restart-button").addEventListener("click", resetGame);
+
+
+function startGame() {
+  resetBoard();
+  messageBox.textContent = "Speler X begint!";
+  currentPlayer = "X"; 
+}
+
+
+function resetGame() {
+  resetBoard();
+  playerScore = 0;
+  computerScore = 0;
+  updateScoreDisplay();
+  localStorage.setItem("playerScore", playerScore);
+  localStorage.setItem("computerScore", computerScore);
+  messageBox.textContent = "";
+}
+
+
+function resetBoard() {
+  for (let i = 0; i < vakjes.length; i++) {
+    vakjes[i].textContent = "";
+  }
+}
 
 
 for (let i = 0; i < vakjes.length; i++) {
-  const vakje = vakjes[i];
-  vakje.addEventListener("click", function () {
-    if (vakje.textContent === "") {
-      vakje.textContent = currentPlayer;
-      if (currentPlayer === "X") {
-        xVakjes.push(i);
-      } else {
-        oVakjes.push(i);
+  vakjes[i].addEventListener("click", function () {
+    if (vakjes[i].textContent === "" && currentPlayer === "X") {
+      vakjes[i].textContent = "X"; 
+      if (checkWinner("X")) {
+        showMessage("Speler X heeft gewonnen!");
+        playerScore++;
+        saveScores();
+        updateScoreDisplay();
+        resetBoard();
+        return;
       }
-      if (checkIfWinner()) {
-        return; // Stop verdere zetten als er een winnaar is
-      }
-      if (checkDraw()) {
-        showMessage("Gelijkspel!");
-        return; // Stop verdere zetten als er een gelijkspel is
-      }
-      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      currentPlayer = "O"; 
+      setTimeout(computerMove, 500); 
     }
   });
 }
 
-function checkIfWinner() {
-  let vakjes;
-
-  if (currentPlayer === "X") {
-    vakjes = xVakjes;
-  } else {
-    vakjes = oVakjes;
-  }
-
-  for (let i = 0; i < winningCombinations.length; i++) {
-    const winningCombo = winningCombinations[i];
-    let playerHasWon = true;
-
-    for (let j = 0; j < winningCombo.length; j++) {
-      const winningNumber = winningCombo[j];
-      const hasWinningNumber = vakjes.includes(winningNumber);
-
-      if (!hasWinningNumber) {
-        playerHasWon = false;
-      }
-    }
-    
-    if (playerHasWon) {
-      showMessage("Player " + currentPlayer + " has won!");
-      return true; // Er is een winnaar gevonden
-    }
-  }
-
-  return false; // Geen winnaar gevonden
-}
-
-function checkDraw() {
-  // Als alle vakjes bezet zijn en er geen winnaar is
+function computerMove() {
+  const legeVakjes = [];
   for (let i = 0; i < vakjes.length; i++) {
     if (vakjes[i].textContent === "") {
-      return false; // Er zijn nog lege vakjes
+      legeVakjes.push(i); 
     }
   }
-  return true; // Geen lege vakjes meer, dus gelijkspel
+  const randomMove = legeVakjes[Math.floor(Math.random() * legeVakjes.length)];
+  vakjes[randomMove].textContent = "O"; 
+  if (checkWinner("O")) {
+    showMessage("Computer heeft gewonnen!");
+    computerScore++;
+    saveScores();
+    updateScoreDisplay();
+    resetBoard();
+  } else {
+    currentPlayer = "X"; // Wissel terug naar de speler
+  }
 }
+
+// Controleer of er een winnaar is
+function checkWinner(player) {
+  const winningCombinations = [
+    [0, 1, 2], // Rij 1
+    [3, 4, 5], // Rij 2
+    [6, 7, 8], // Rij 3
+    [0, 3, 6], // Kolom 1
+    [1, 4, 7], // Kolom 2
+    [2, 5, 8], // Kolom 3
+    [0, 4, 8], // Diagonaal 1
+    [2, 4, 6], // Diagonaal 2
+  ];
+
+  return winningCombinations.some(function (combo) {
+    return combo.every(function (i) {
+      return vakjes[i].textContent === player;
+    });
+  });
+}
+
 
 function showMessage(message) {
   messageBox.textContent = message;
   messageBox.style.display = "block";
 }
 
-const winningCombinations = [
-  [0, 1, 2], // Rij 1: vakje 1, vakje 2, vakje 3
-  [3, 4, 5], // Rij 2: vakje 4, vakje 5, vakje 6
-  [6, 7, 8], // Rij 3: vakje 7, vakje 8, vakje 9
-  [0, 3, 6], // Kolom 1: vakje 1, vakje 4, vakje 7
-  [1, 4, 7], // Kolom 2: vakje 2, vakje 5, vakje 8
-  [2, 5, 8], // Kolom 3: vakje 3, vakje 6, vakje 9
-  [0, 4, 8], // Diagonaal 1: vakje 1, vakje 5, vakje 9
-  [2, 4, 6], // Diagonaal 2: vakje 3, vakje 5, vakje 7
-];
+// Sla de scores op in localStorage
+function saveScores() {
+  localStorage.setItem("playerScore", playerScore);
+  localStorage.setItem("computerScore", computerScore);
+}
 
 
+function updateScoreDisplay() {
+  playerScoreElement.textContent = playerScore;
+  computerScoreElement.textContent = computerScore;
+}
