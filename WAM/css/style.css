@@ -26,15 +26,15 @@ body {
 
 .speelbord {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 15px;
+    grid-template-columns: repeat(3, 150px);  /* Vergroot de breedte van de kolommen */
+    grid-template-rows: repeat(3, 150px);  /* Vergroot de hoogte van de rijen */
+    gap: 20px;  /* Vergroot de afstand tussen de cirkels */
 }
 
 .circle {
     background-color: rgb(80, 35, 14);
-    width: 100px;
-    height: 100px;
+    width: 150px;  /* Vergroot de breedte van de cirkel */
+    height: 150px;  /* Vergroot de hoogte van de cirkel */
     border-radius: 50%;
     position: relative;
     cursor: pointer;
@@ -46,8 +46,8 @@ body {
 
 .mole {
     background-color: rgb(105, 105, 105);
-    width: 50px;
-    height: 50px;
+    width: 75px;  /* Vergroot de mole */
+    height: 75px;  /* Vergroot de mole */
     position: absolute;
     top: 50%;
     left: 50%;
