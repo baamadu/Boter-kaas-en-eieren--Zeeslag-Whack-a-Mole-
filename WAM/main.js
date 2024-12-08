@@ -10,11 +10,12 @@ function askName() {
     } else {
       alert("Je hebt geen naam ingevuld");
     }
-  }
-  askName();
+}
+askName();
 
+// Functie om berichten te tonen
 function showMessage(message) {
-    messageBox.textContent = `$(message) Score: ${score}`;
+    messageBox.textContent = `${message} Score: ${score}`; // Toon bericht met score
     messageBox.style.display = 'block';
     setTimeout(() => {
         messageBox.style.display = 'none';
@@ -22,7 +23,7 @@ function showMessage(message) {
 }
 
 function updateScoreDisplay() {
-    scoreDisplay.textContent = `Score: $(score)`;
+    scoreDisplay.textContent = `Score: ${score}`;
 }
 
 circles.forEach((circle, i) => {
@@ -31,49 +32,48 @@ circles.forEach((circle, i) => {
 
 circles.forEach(function(circle) {
     circle.addEventListener('click', function() {
-        // Check if the circle is already filled
         if (circle.classList.contains('filled')) {
             console.log('Deze cirkel is al gevuld');
             return;
         }
 
-        // Check if a mole is on the field
+        // Controleer of er een mol is
         if (circle.classList.contains('mole')) {
-            console.log('Je hebt de mol geraakt');
+            score++;  // Verhoog de score bij het raken van een mol
+            showMessage('Je hebt de mol geraakt!');
         } else {
-            console.log('Geen mol in dit veld');
+            score--;  // Verlaag de score bij het missen
+            showMessage('Geen mol in dit veld!');
         }
 
+        updateScoreDisplay();
         circle.classList.add('filled');
 
-        // If a mole was hit
-        if (circle.classList.contains('mole')) {
-            console.log('Mol werd geraakt');
-        }
-        console.log('Veld gevuld!');
+        setTimeout(() => {
+            circle.classList.remove('filled');
+        }, 1000);
     });
 });
 
-// Function to get a random circle
 function getRandomCircle() {
     const randomIndex = Math.floor(Math.random() * circles.length);
-    return circles[randomIndex];    
+    return circles[randomIndex];
 }
 
-// Function to show a mole on a random circle
+// Functie om een mol in een willekeurige cirkel te tonen
 function showMole() {
     const randomCircle = getRandomCircle();
     const mole = document.createElement('div');
     mole.classList.add('mole');
     randomCircle.appendChild(mole);
 
-    // Random timer for the mole to disappear
+    // Willekeurige tijd voor de mol om te verdwijnen
     const randomTime = Math.floor(Math.random() * 2000) + 1000;
 
-    // Set a timeout for the mole to disappear
     setTimeout(() => {
-        randomCircle.removeChild(mole);
+        randomCircle.removeChild(mole);  // Verwijder de mol na een tijd
     }, randomTime);
 }
 
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
+
