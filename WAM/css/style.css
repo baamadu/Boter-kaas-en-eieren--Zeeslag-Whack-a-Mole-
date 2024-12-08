@@ -5,7 +5,10 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #4CAF50;
+    background-image: url('img/background-of-green-grass-field-cartoon-drawing-free-vector.jpg');
+    background-size: cover;  /* Zorg ervoor dat de afbeelding het hele scherm bedekt */
+    background-position: center;  /* Zorg ervoor dat de afbeelding gecentreerd blijft */
+    background-repeat: no-repeat;  /* Voorkom herhaling van de afbeelding */
     flex-direction: column;
 }
 

@@ -76,4 +76,3 @@ function showMole() {
 }
 
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
-
