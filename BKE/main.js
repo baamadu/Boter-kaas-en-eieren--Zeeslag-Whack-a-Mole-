@@ -1,22 +1,26 @@
 console.log("Main loaded");
 
-function askName() {
-  const name = prompt("Wat is je naam");
-  if (name) {
-    alert("Welkom, " + name + "!");
+let playerName = localStorage.getItem("playerName"); 
+
+
+if (!playerName) {
+  playerName = prompt("Wat is je naam?");
+  if (playerName) {
+    localStorage.setItem("playerName", playerName); 
+    alert("Welkom, " + playerName + "!");
   } else {
     alert("Je hebt geen naam ingevuld");
   }
+} else {
+  alert("Welkom terug, " + playerName + "!");
 }
 
-askName();
 
 
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
 
 let currentPlayer = "X"; // Speler X begint
-
 
 let playerScore = localStorage.getItem("playerScore")
   ? parseInt(localStorage.getItem("playerScore"))
@@ -25,25 +29,20 @@ let computerScore = localStorage.getItem("computerScore")
   ? parseInt(localStorage.getItem("computerScore"))
   : 0;
 
-
 const playerScoreElement = document.querySelector("#player-score");
 const computerScoreElement = document.querySelector("#computer-score");
-const messageBox = document.querySelector(".messageBox"); 
-
+const messageBox = document.querySelector(".messageBox");
 
 updateScoreDisplay();
 
-
 document.querySelector(".start-button").addEventListener("click", startGame);
 document.querySelector(".restart-button").addEventListener("click", resetGame);
-
 
 function startGame() {
   resetBoard();
   messageBox.textContent = "Speler X begint!";
   currentPlayer = "X"; 
 }
-
 
 function resetGame() {
   resetBoard();
@@ -55,13 +54,11 @@ function resetGame() {
   messageBox.textContent = "";
 }
 
-
 function resetBoard() {
   for (let i = 0; i < vakjes.length; i++) {
     vakjes[i].textContent = "";
   }
 }
-
 
 for (let i = 0; i < vakjes.length; i++) {
   vakjes[i].addEventListener("click", function () {
@@ -101,7 +98,6 @@ function computerMove() {
   }
 }
 
-// Controleer of er een winnaar is
 function checkWinner(player) {
   const winningCombinations = [
     [0, 1, 2], // Rij 1
@@ -121,20 +117,19 @@ function checkWinner(player) {
   });
 }
 
-
 function showMessage(message) {
   messageBox.textContent = message;
   messageBox.style.display = "block";
 }
-
 
 function saveScores() {
   localStorage.setItem("playerScore", playerScore);
   localStorage.setItem("computerScore", computerScore);
 }
 
-
 function updateScoreDisplay() {
   playerScoreElement.textContent = playerScore;
   computerScoreElement.textContent = computerScore;
 }
+
+
