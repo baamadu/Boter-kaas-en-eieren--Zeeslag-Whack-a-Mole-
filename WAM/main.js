@@ -20,6 +20,7 @@ function showMessage(message) {
     setTimeout(() => {
         messageBox.style.display = 'none';
     }, 3000);
+    console.log(message)
 }
 
 function updateScoreDisplay() {
@@ -36,12 +37,15 @@ circles.forEach(function(circle) {
             console.log('Deze cirkel is al gevuld');
             return;
         }
-
+        console.log(circle)
+        const circleChild = circle.firstChild
         // Controleer of er een mol is
-        if (circle.classList.contains('mole')) {
+        if (circleChild && circleChild.classList.contains('mole')) {
             score++;  // Verhoog de score bij het raken van een mol
             showMessage('Je hebt de mol geraakt!');
+            console.log(score,'geraakt')
         } else {
+            console.log(score)
             score--;  // Verlaag de score bij het missen
             showMessage('Geen mol in dit veld!');
         }

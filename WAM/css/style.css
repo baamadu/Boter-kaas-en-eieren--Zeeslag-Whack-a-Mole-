@@ -6,9 +6,9 @@ body {
     height: 100vh;
     margin: 0;
     background-image: url('img/background-of-green-grass-field-cartoon-drawing-free-vector.jpg');
-    background-size: cover;  /* Zorg ervoor dat de afbeelding het hele scherm bedekt */
-    background-position: center;  /* Zorg ervoor dat de afbeelding gecentreerd blijft */
-    background-repeat: no-repeat;  /* Voorkom herhaling van de afbeelding */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
     flex-direction: column;
 }
 
@@ -26,15 +26,15 @@ body {
 
 .speelbord {
     display: grid;
-    grid-template-columns: repeat(3, 150px);  /* Vergroot de breedte van de kolommen */
-    grid-template-rows: repeat(3, 150px);  /* Vergroot de hoogte van de rijen */
-    gap: 20px;  /* Vergroot de afstand tussen de cirkels */
+    grid-template-columns: repeat(3, 150px);  
+    grid-template-rows: repeat(3, 150px);  
+    gap: 20px;  
 }
 
 .circle {
     background-color: rgb(80, 35, 14);
-    width: 150px;  /* Vergroot de breedte van de cirkel */
-    height: 150px;  /* Vergroot de hoogte van de cirkel */
+    width: 150px;  
+    height: 150px;  
     border-radius: 50%;
     position: relative;
     cursor: pointer;
@@ -46,8 +46,8 @@ body {
 
 .mole {
     background-color: rgb(105, 105, 105);
-    width: 75px;  /* Vergroot de mole */
-    height: 75px;  /* Vergroot de mole */
+    width: 75px;  
+    height: 75px;  
     position: absolute;
     top: 50%;
     left: 50%;
