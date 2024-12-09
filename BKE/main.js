@@ -1,5 +1,16 @@
 console.log("Main loaded");
 
+function askName() {
+  const name = prompt("Wat is je naam");
+  if (name) {
+    alert("Welkom, " + name + "!");
+  } else {
+    alert("Je hebt geen naam ingevuld");
+  }
+}
+
+askName();
+
 
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
@@ -19,7 +30,7 @@ const playerScoreElement = document.querySelector("#player-score");
 const computerScoreElement = document.querySelector("#computer-score");
 const messageBox = document.querySelector(".messageBox"); 
 
-// Toon de score op basis van localStorage
+
 updateScoreDisplay();
 
 
@@ -116,7 +127,7 @@ function showMessage(message) {
   messageBox.style.display = "block";
 }
 
-// Sla de scores op in localStorage
+
 function saveScores() {
   localStorage.setItem("playerScore", playerScore);
   localStorage.setItem("computerScore", computerScore);

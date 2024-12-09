@@ -40,7 +40,7 @@
   z-index: -1;
 }
 .messageBox{
-  color: white;
+  color: green;
   font-size: xx-large;
  
 }
@@ -52,3 +52,4 @@
 .container{
   font-size: large;
 }
+
