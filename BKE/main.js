@@ -2,7 +2,6 @@ console.log("Main loaded");
 
 let playerName = localStorage.getItem("playerName"); 
 
-
 if (!playerName) {
   playerName = prompt("Wat is je naam?");
   if (playerName) {
@@ -14,8 +13,6 @@ if (!playerName) {
 } else {
   alert("Welkom terug, " + playerName + "!");
 }
-
-
 
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
@@ -72,6 +69,11 @@ for (let i = 0; i < vakjes.length; i++) {
         resetBoard();
         return;
       }
+      if (checkDraw()) {
+        showMessage("Het is een gelijkspel!");
+        resetBoard();
+        return;
+      }
       currentPlayer = "O"; 
       setTimeout(computerMove, 500); 
     }
@@ -92,6 +94,9 @@ function computerMove() {
     computerScore++;
     saveScores();
     updateScoreDisplay();
+    resetBoard();
+  } else if (checkDraw()) {
+    showMessage("Het is een gelijkspel!");
     resetBoard();
   } else {
     currentPlayer = "X"; // Wissel terug naar de speler
@@ -115,6 +120,11 @@ function checkWinner(player) {
       return vakjes[i].textContent === player;
     });
   });
+}
+
+function checkDraw() {
+  // Check if all cells are filled and there's no winner
+  return [...vakjes].every(vakje => vakje.textContent !== "") && !checkWinner("X") && !checkWinner("O");
 }
 
 function showMessage(message) {
