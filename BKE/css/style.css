@@ -40,16 +40,45 @@
   z-index: -1;
 }
 .messageBox{
-  color: green;
+  color: greenyellow;
   font-size: xx-large;
  
 }
 
 .score{
-  color: green;
+  color: greenyellow;
   font-size: xx-large;
+  background-color: rgba(0, 0, 0, 0.485);
+  width: fit-content;
+  padding: 5px;
 }
 .container{
   font-size: large;
 }
+.start-button{
+  font-size: 20px;
+  padding: 15px 30px; 
+  width: auto; 
+  height: auto;
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
+}
+
+.restart-button{
+  font-size: 20px;
+  padding: 15px 30px; 
+  width: auto; 
+  height: auto;
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer; 
+  transition: background-color 0.3s;
+}
+
 
