@@ -40,6 +40,21 @@
   background-color: white; /* verandert de achtergrond naar wit bij hover */
 }
 
+.box1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(23, 165, 217);
+  padding: 10px;
+  text-align: center;
+  aspect-ratio: 1;
+  background-color: rgb(23, 165, 217); /* juiste achtergrondkleur */
+}
+
+.box1:hover {
+  background-color: white; /* verandert de achtergrond naar wit bij hover */
+}
+
 .booten-container {
   position: absolute;
   top: 20px;
@@ -217,84 +232,84 @@
   color: white;
 }
 
-.box:nth-child(21) {
+.box1:nth-child(1) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(22) {
+.box1:nth-child(2) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(23) {
+.box1:nth-child(3) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(24) {
+.box1:nth-child(4) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(25) {
+.box1:nth-child(5) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(26) {
+.box1:nth-child(6) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(27) {
+.box1:nth-child(7) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
 
-.box:nth-child(28) {
+.box1:nth-child(8) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(29) {
+.box1:nth-child(9) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(30) {
+.box1:nth-child(10) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(31) {
+.box1:nth-child(11) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(32) {
+.box1:nth-child(12) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(33) {
+.box1:nth-child(13) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(34) {
+.box1:nth-child(14) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(35) {
+.box1:nth-child(15) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(36) {
+.box1:nth-child(16) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(37) {
+.box1:nth-child(17) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(38) {
+.box1:nth-child(18) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(39) {
+.box1:nth-child(19) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
-.box:nth-child(40) {
+.box1:nth-child(20) {
   background-color: rgb(23, 165, 217);
   color: white;
 }
@@ -331,9 +346,20 @@
   transition: opacity 0.5s ease; /* Zorgt voor een vloeiende overgang */
 }
 
-.messagebox.show {
-  visibility: visible;
-  opacity: 1;
+.messageBox {
+  display: none; /* Standaard niet zichtbaar */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: lightblue;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.messageBox.show {
+  display: block; /* Maak zichtbaar wanneer de show class is toegevoegd */
 }
 
 .scorebord {
