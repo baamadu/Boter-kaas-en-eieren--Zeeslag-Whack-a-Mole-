@@ -3,13 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boter, kaas en eieren</title>
+    <title>Boter, Kaas en Eieren</title>
     <link rel="stylesheet" href="css/style.css" />
-    
-   
   </head>
   <body>
-    
+    <img
+      src="img/boter-kaas-en-eieren-op-de-kiezelstenen-aan-de-kust_342379-190.png"
+      alt="background"
+      class="b-image"
+    />
     <div class="speelbord">
       <div class="vakje"></div>
       <div class="vakje"></div>
@@ -20,7 +22,17 @@
       <div class="vakje"></div>
       <div class="vakje"></div>
       <div class="vakje"></div>
-      </div>
-      <script src="main.js"></script>
+    </div>
+    <div class="messageBox"></div>
+    <div class="score">
+      <p>Speler Score: <span id="player-score">0</span></p>
+      <p>Computer Score: <span id="computer-score">0</span></p>
+    </div>
+    <div class="container">
+      <button class="start-button">Start</button>
+      <button class="restart-button">Restart</button>
+      <p class="result"></p>
+    </div>
+    <script src="main.js"></script>
   </body>
 </html>

@@ -1,3 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  height: 100vh; /* Zorg ervoor dat de body de volledige hoogte van het scherm gebruikt */
+  color: white; /* Zorg ervoor dat de tekst wit is */
+  
+}
+
 .speelbord {
   display: grid;
   grid-template-columns: 100px 100px 100px;
@@ -5,17 +19,37 @@
   gap: 5px;
   margin: 0 auto;
   width: fit-content;
-  
- }
-.vakje{
-    width: 100px;
-    height: 100px;
-    background-color: transparent;
-    border: 10px solid green;
-    display: flex;
-    font-size: 50px;
-    align-items: center;
-    justify-content: center;
-    
+}
+
+.vakje {
+  width: 100px;
+  height: 100px;
+  border: 10px solid green;
+  display: flex;
+  font-size: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.b-image {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+.messageBox{
+  color: green;
+  font-size: xx-large;
+ 
+}
+
+.score{
+  color: green;
+  font-size: xx-large;
+}
+.container{
+  font-size: large;
 }
 
