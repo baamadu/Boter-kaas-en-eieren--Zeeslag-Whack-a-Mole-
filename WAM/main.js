@@ -1,35 +1,61 @@
 const circles = document.querySelectorAll('.circle');
 const messageBox = document.getElementById('messageBox');
 const scoreDisplay = document.getElementById('scoreDisplay');
+
 let score = 0;
 
-function askName() {
-    const name = prompt("Wat is je naam?");
-    if (name) {
-      alert("Welkom, " + name + "!");
-    } else {
-      alert("Je hebt geen naam ingevuld");
-    }
-}
-askName();
+// Lijst met verboden woorden die we willen blokkeren
+const forbiddenWords = ['shit', 'fuck', 'sigma'];
 
-// Functie om berichten te tonen
+// Functie om de naam van de speler in te voeren
+function askName() {
+    // Vraag de naam van de speler
+    let name = prompt("Wat is je naam?");
+    
+    while (name === '' || containsForbiddenWords(name) || containsInvalidCharacters(name)) {
+        if (name === '') {
+            alert("Je hebt geen naam ingevuld.");
+        } else if (containsForbiddenWords(name)) {
+            alert("Je naam bevat ongepaste woorden. Probeer het opnieuw.");
+        } else if (containsInvalidCharacters(name)) {
+            alert("Je naam bevat ongewenste tekens. Alleen letters en spaties zijn toegestaan.");
+        }
+        // Vraag opnieuw om de naam als die niet geldig is
+        name = prompt("Wat is je naam?");
+    }
+
+    // Als een geldige naam is ingevoerd, stel deze in
+    playerName = name;
+    alert("Welkom, " + playerName + "!");
+    updateScoreDisplay();
+}
+
+// Functie om te controleren of de naam verboden woorden bevat
+function containsForbiddenWords(name) {
+    const lowerCaseName = name.toLowerCase();
+    return forbiddenWords.some(word => lowerCaseName.includes(word));
+}
+
+// Functie om te controleren of de naam ongeldige tekens bevat
+function containsInvalidCharacters(name) {
+    const invalidCharacters = /[^a-zA-Z\s]/;
+    return invalidCharacters.test(name);
+}
+
+// Functie om een bericht weer te geven in het berichtvak
 function showMessage(message) {
-    messageBox.textContent = `${message} Score: ${score}`; // Toon bericht met score
+    messageBox.textContent = `${message} Score: ${score}`;
     messageBox.style.display = 'block';
     setTimeout(() => {
         messageBox.style.display = 'none';
     }, 3000);
-    console.log(message)
+    console.log(message);
 }
 
+// Functie om de score van de speler bij te werken
 function updateScoreDisplay() {
-    scoreDisplay.textContent = `Score: ${score}`;
+    scoreDisplay.textContent = `${playerName}: Score: ${score}`;
 }
-
-circles.forEach((circle, i) => {
-    console.log(`Circle ${i + 1}:`, circle);
-});
 
 circles.forEach(function(circle) {
     circle.addEventListener('click', function() {
@@ -37,16 +63,15 @@ circles.forEach(function(circle) {
             console.log('Deze cirkel is al gevuld');
             return;
         }
-        console.log(circle)
-        const circleChild = circle.firstChild
-        // Controleer of er een mol is
+
+        const circleChild = circle.firstChild;  // Zoek het kind-element van de cirkel
         if (circleChild && circleChild.classList.contains('mole')) {
-            score++;  // Verhoog de score bij het raken van een mol
+            // Als er een mol in de cirkel is, verhoog de score
+            score++;
             showMessage('Je hebt de mol geraakt!');
-            console.log(score,'geraakt')
         } else {
-            console.log(score)
-            score--;  // Verlaag de score bij het missen
+            // Als er geen mol in de cirkel is, verlaag de score
+            score--;
             showMessage('Geen mol in dit veld!');
         }
 
@@ -59,6 +84,7 @@ circles.forEach(function(circle) {
     });
 });
 
+// Functie om een willekeurige cirkel te krijgen
 function getRandomCircle() {
     const randomIndex = Math.floor(Math.random() * circles.length);
     return circles[randomIndex];
@@ -75,8 +101,10 @@ function showMole() {
     const randomTime = Math.floor(Math.random() * 2000) + 1000;
 
     setTimeout(() => {
-        randomCircle.removeChild(mole);  // Verwijder de mol na een tijd
+        randomCircle.removeChild(mole);
     }, randomTime);
 }
 
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
+
+askName();

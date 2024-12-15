@@ -6,9 +6,9 @@ body {
     height: 100vh;
     margin: 0;
     background-image: url('img/background-of-green-grass-field-cartoon-drawing-free-vector.jpg');
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;  
     flex-direction: column;
 }
 
@@ -46,8 +46,8 @@ body {
 
 .mole {
     background-color: rgb(105, 105, 105);
-    width: 75px;  
-    height: 75px;  
+    width: 75px;
+    height: 75px;
     position: absolute;
     top: 50%;
     left: 50%;
