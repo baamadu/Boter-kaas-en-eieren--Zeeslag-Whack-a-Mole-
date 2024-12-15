@@ -6,9 +6,9 @@ body {
     height: 100vh;
     margin: 0;
     background-image: url('img/background-of-green-grass-field-cartoon-drawing-free-vector.jpg');
-    background-size: cover;  
-    background-position: center;  
-    background-repeat: no-repeat;  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     flex-direction: column;
 }
 
@@ -26,18 +26,20 @@ body {
 
 .speelbord {
     display: grid;
-    grid-template-columns: repeat(3, 150px);  
-    grid-template-rows: repeat(3, 150px);  
-    gap: 20px;  
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+    gap: 20px;
+    justify-items: center;
 }
 
 .circle {
     background-color: rgb(80, 35, 14);
-    width: 150px;  
-    height: 150px;  
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     position: relative;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 .circle.filled {

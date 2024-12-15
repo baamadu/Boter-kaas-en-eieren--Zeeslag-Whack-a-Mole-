@@ -1,15 +1,15 @@
-const circles = document.querySelectorAll('.circle');
+const circlesContainer = document.querySelector('.speelbord');
 const messageBox = document.getElementById('messageBox');
 const scoreDisplay = document.getElementById('scoreDisplay');
 
 let score = 0;
+let playerName = '';
 
 // Lijst met verboden woorden die we willen blokkeren
 const forbiddenWords = ['shit', 'fuck', 'sigma'];
 
 // Functie om de naam van de speler in te voeren
 function askName() {
-    // Vraag de naam van de speler
     let name = prompt("Wat is je naam?");
     
     while (name === '' || containsForbiddenWords(name) || containsInvalidCharacters(name)) {
@@ -20,11 +20,9 @@ function askName() {
         } else if (containsInvalidCharacters(name)) {
             alert("Je naam bevat ongewenste tekens. Alleen letters en spaties zijn toegestaan.");
         }
-        // Vraag opnieuw om de naam als die niet geldig is
         name = prompt("Wat is je naam?");
     }
 
-    // Als een geldige naam is ingevoerd, stel deze in
     playerName = name;
     alert("Welkom, " + playerName + "!");
     updateScoreDisplay();
@@ -49,7 +47,6 @@ function showMessage(message) {
     setTimeout(() => {
         messageBox.style.display = 'none';
     }, 3000);
-    console.log(message);
 }
 
 // Functie om de score van de speler bij te werken
@@ -57,35 +54,61 @@ function updateScoreDisplay() {
     scoreDisplay.textContent = `${playerName}: Score: ${score}`;
 }
 
-circles.forEach(function(circle) {
-    circle.addEventListener('click', function() {
-        if (circle.classList.contains('filled')) {
-            console.log('Deze cirkel is al gevuld');
-            return;
-        }
+// Functie om de grootte van het speelbord aan te passen afhankelijk van de score
+function updateBoardSize() {
+    if (score >= 10) {
+        createCircles(6);  // 6x6 bord
+    } else if (score >= 8) {
+        createCircles(5);  // 5x5 bord
+    } else if (score >= 5) {
+        createCircles(4);  // 4x4 bord
+    }
+}
 
-        const circleChild = circle.firstChild;  // Zoek het kind-element van de cirkel
-        if (circleChild && circleChild.classList.contains('mole')) {
-            // Als er een mol in de cirkel is, verhoog de score
-            score++;
-            showMessage('Je hebt de mol geraakt!');
-        } else {
-            // Als er geen mol in de cirkel is, verlaag de score
-            score--;
-            showMessage('Geen mol in dit veld!');
-        }
+// Functie om cirkels te genereren afhankelijk van het bordformaat
+function createCircles(size) {
+    circlesContainer.innerHTML = '';  // Leeg het bord voordat we nieuwe cirkels toevoegen
 
-        updateScoreDisplay();
-        circle.classList.add('filled');
+    // Pas de grid aan volgens de grootte
+    circlesContainer.style.gridTemplateColumns = `repeat(${size}, 150px)`;
+    circlesContainer.style.gridTemplateRows = `repeat(${size}, 150px)`;
 
-        setTimeout(() => {
-            circle.classList.remove('filled');
-        }, 1000);
-    });
-});
+    for (let i = 0; i < size * size; i++) {
+        const circle = document.createElement('div');
+        circle.classList.add('circle');
+        circlesContainer.appendChild(circle);
+
+        circle.addEventListener('click', function() {
+            if (circle.classList.contains('filled')) {
+                console.log('Deze cirkel is al gevuld');
+                return;
+            }
+
+            const circleChild = circle.firstChild;  // Zoek het kind-element van de cirkel
+            if (circleChild && circleChild.classList.contains('mole')) {
+                // Als er een mol in de cirkel is, verhoog de score
+                score++;
+                showMessage('Je hebt de mol geraakt!');
+            } else {
+                // Als er geen mol in de cirkel is, verlaag de score
+                score--;
+                showMessage('Geen mol in dit veld!');
+            }
+
+            updateScoreDisplay();
+            updateBoardSize();  // Pas de grootte van het bord aan op basis van de score
+
+            circle.classList.add('filled');
+            setTimeout(() => {
+                circle.classList.remove('filled');
+            }, 1000);
+        });
+    }
+}
 
 // Functie om een willekeurige cirkel te krijgen
 function getRandomCircle() {
+    const circles = document.querySelectorAll('.circle');
     const randomIndex = Math.floor(Math.random() * circles.length);
     return circles[randomIndex];
 }
@@ -105,6 +128,11 @@ function showMole() {
     }, randomTime);
 }
 
+// Start een interval om de mol te laten verschijnen
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
 
+// Vraag de naam van de speler
 askName();
+
+// Initialiseer het bord met 3x3
+createCircles(3);
