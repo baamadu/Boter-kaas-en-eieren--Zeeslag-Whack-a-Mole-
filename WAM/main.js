@@ -57,11 +57,11 @@ function updateScoreDisplay() {
 // Functie om de grootte van het speelbord aan te passen afhankelijk van de score
 function updateBoardSize() {
     if (score >= 10) {
-        createCircles(6);  // 6x6 bord
+        createCircles(6);
     } else if (score >= 8) {
-        createCircles(5);  // 5x5 bord
+        createCircles(5);
     } else if (score >= 5) {
-        createCircles(4);  // 4x4 bord
+        createCircles(4);
     }
 }
 
@@ -84,13 +84,11 @@ function createCircles(size) {
                 return;
             }
 
-            const circleChild = circle.firstChild;  // Zoek het kind-element van de cirkel
+            const circleChild = circle.firstChild;
             if (circleChild && circleChild.classList.contains('mole')) {
-                // Als er een mol in de cirkel is, verhoog de score
                 score++;
                 showMessage('Je hebt de mol geraakt!');
             } else {
-                // Als er geen mol in de cirkel is, verlaag de score
                 score--;
                 showMessage('Geen mol in dit veld!');
             }
@@ -128,10 +126,8 @@ function showMole() {
     }, randomTime);
 }
 
-// Start een interval om de mol te laten verschijnen
 setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
 
-// Vraag de naam van de speler
 askName();
 
 // Initialiseer het bord met 3x3
