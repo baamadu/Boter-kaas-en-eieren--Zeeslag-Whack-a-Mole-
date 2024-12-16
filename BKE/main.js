@@ -1,12 +1,28 @@
 console.log("Main loaded");
 
-let playerName = localStorage.getItem("playerName"); 
+let playerName = localStorage.getItem("playerName");
+
+// Array van ongeldige woorden (bijvoorbeeld scheldwoorden)
+const invalidWords = ["scheldwoord1", "scheldwoord2", "scheldwoord3"]; // Vervang deze met echte scheldwoorden
 
 if (!playerName) {
   playerName = prompt("Wat is je naam?");
+  
   if (playerName) {
-    localStorage.setItem("playerName", playerName); 
-    alert("Welkom, " + playerName + "!");
+    // Verwijder alles behalve letters en spaties
+    playerName = playerName.replace(/[^a-zA-Z\s]/g, '');
+    
+    // Controleer op ongeldige woorden
+    const containsInvalidWord = invalidWords.some(word => playerName.toLowerCase().includes(word.toLowerCase()));
+    
+    if (containsInvalidWord) {
+      alert("De naam bevat ongeldige woorden. Kies een andere naam.");
+    } else if (playerName.trim() === "") {
+      alert("De naam kan niet leeg zijn.");
+    } else {
+      localStorage.setItem("playerName", playerName);
+      alert("Welkom, " + playerName + "!");
+    }
   } else {
     alert("Je hebt geen naam ingevuld");
   }
@@ -26,8 +42,9 @@ let computerScore = localStorage.getItem("computerScore")
   ? parseInt(localStorage.getItem("computerScore"))
   : 0;
 
-const playerScoreElement = document.querySelector("#player-score");
-const computerScoreElement = document.querySelector("#computer-score");
+const playerNameElement = document.querySelector("#player-name");
+const playerScoreElement = document.querySelector("#score-value");
+const computerScoreElement = document.querySelector("#computer-score-value");
 const messageBox = document.querySelector(".messageBox");
 
 updateScoreDisplay();
@@ -123,7 +140,6 @@ function checkWinner(player) {
 }
 
 function checkDraw() {
-  // Check if all cells are filled and there's no winner
   return [...vakjes].every(vakje => vakje.textContent !== "") && !checkWinner("X") && !checkWinner("O");
 }
 
@@ -138,8 +154,11 @@ function saveScores() {
 }
 
 function updateScoreDisplay() {
-  playerScoreElement.textContent = playerScore;
-  computerScoreElement.textContent = computerScore;
+  playerNameElement.textContent = playerName;  
+  playerScoreElement.textContent = playerScore; 
+  computerScoreElement.textContent = computerScore; 
 }
+
+
 
 
