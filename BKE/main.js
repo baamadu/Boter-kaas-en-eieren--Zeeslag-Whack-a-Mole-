@@ -1,18 +1,27 @@
 console.log("Main loaded");
 
-let playerName = localStorage.getItem("playerName"); 
+let playerName = localStorage.getItem("playerName");
 
 if (!playerName) {
   playerName = prompt("Wat is je naam?");
+  
   if (playerName) {
-    localStorage.setItem("playerName", playerName); 
-    alert("Welkom, " + playerName + "!");
+    // Verwijder alles behalve letters en spaties
+    playerName = playerName.replace(/[^a-zA-Z\s]/g, '');
+    
+    if (playerName.trim() === "") {
+      alert("De naam kan niet leeg zijn.");
+    } else {
+      localStorage.setItem("playerName", playerName);
+      alert("Welkom, " + playerName + "!");
+    }
   } else {
     alert("Je hebt geen naam ingevuld");
   }
 } else {
   alert("Welkom terug, " + playerName + "!");
 }
+
 
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
@@ -26,8 +35,9 @@ let computerScore = localStorage.getItem("computerScore")
   ? parseInt(localStorage.getItem("computerScore"))
   : 0;
 
-const playerScoreElement = document.querySelector("#player-score");
-const computerScoreElement = document.querySelector("#computer-score");
+const playerNameElement = document.querySelector("#player-name");
+const playerScoreElement = document.querySelector("#score-value");
+const computerScoreElement = document.querySelector("#computer-score-value");
 const messageBox = document.querySelector(".messageBox");
 
 updateScoreDisplay();
@@ -138,8 +148,10 @@ function saveScores() {
 }
 
 function updateScoreDisplay() {
-  playerScoreElement.textContent = playerScore;
-  computerScoreElement.textContent = computerScore;
+  playerNameElement.textContent = playerName;  // Toon de naam van de speler
+  playerScoreElement.textContent = playerScore; // Toon de score van de speler
+  computerScoreElement.textContent = computerScore; // Toon de score van de computer
 }
+
 
 
