@@ -3,9 +3,10 @@ console.log("Main loaded");
 let playerName = localStorage.getItem("playerName");
 
 // Array van ongeldige woorden (bijvoorbeeld scheldwoorden)
-const invalidWords = ["scheldwoord1", "scheldwoord2", "scheldwoord3"]; // Vervang deze met echte scheldwoorden
+const invalidWords = ["kanker", "fuck", "mongool", "shit"]; // Vervang deze met echte scheldwoorden
 
-if (!playerName) {
+// Functie voor het vragen en valideren van de naam
+function askForPlayerName() {
   playerName = prompt("Wat is je naam?");
   
   if (playerName) {
@@ -17,15 +18,25 @@ if (!playerName) {
     
     if (containsInvalidWord) {
       alert("De naam bevat ongeldige woorden. Kies een andere naam.");
+      playerName = ""; // Zet de naam leeg zodat de prompt opnieuw wordt getoond
+      // Vraag opnieuw om een naam totdat deze geldig is
+      askForPlayerName(); // Herhaal totdat een geldige naam wordt ingevoerd
     } else if (playerName.trim() === "") {
-      alert("De naam kan niet leeg zijn.");
+      alert("ongeldige naam.");
+      askForPlayerName(); // Herhaal totdat een geldige naam wordt ingevoerd
     } else {
       localStorage.setItem("playerName", playerName);
       alert("Welkom, " + playerName + "!");
     }
   } else {
     alert("Je hebt geen naam ingevuld");
+    askForPlayerName(); 
   }
+}
+
+// Vraag de naam van de speler als deze nog niet is opgeslagen
+if (!playerName) {
+  askForPlayerName();
 } else {
   alert("Welkom terug, " + playerName + "!");
 }
@@ -59,6 +70,10 @@ function startGame() {
 }
 
 function resetGame() {
+  // Vraag opnieuw om de naam wanneer de game wordt herstart
+  askForPlayerName(); // Eerst naam vragen
+  
+  // Vervolgens reset het bord en de score
   resetBoard();
   playerScore = 0;
   computerScore = 0;
@@ -140,6 +155,7 @@ function checkWinner(player) {
 }
 
 function checkDraw() {
+  // Check if all cells are filled and there's no winner
   return [...vakjes].every(vakje => vakje.textContent !== "") && !checkWinner("X") && !checkWinner("O");
 }
 
@@ -154,11 +170,8 @@ function saveScores() {
 }
 
 function updateScoreDisplay() {
-  playerNameElement.textContent = playerName;  
-  playerScoreElement.textContent = playerScore; 
-  computerScoreElement.textContent = computerScore; 
+  playerNameElement.textContent = playerName;  // Toon de naam van de speler
+  playerScoreElement.textContent = playerScore; // Toon de score van de speler
+  computerScoreElement.textContent = computerScore; // Toon de score van de computer
 }
-
-
-
 

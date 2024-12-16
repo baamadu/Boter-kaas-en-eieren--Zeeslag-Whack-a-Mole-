@@ -119,7 +119,7 @@ function showMole() {
     randomCircle.appendChild(mole);
 
     // Willekeurige tijd voor de mol om te verdwijnen
-    const randomTime = Math.floor(Math.random() * 2000) + 1000;
+    const randomTime = Math.floor(Math.random() * 1000) + 1000;
 
     setTimeout(() => {
         randomCircle.removeChild(mole);
