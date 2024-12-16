@@ -2,6 +2,9 @@ console.log("Main loaded");
 
 let playerName = localStorage.getItem("playerName");
 
+// Array van ongeldige woorden (bijvoorbeeld scheldwoorden)
+const invalidWords = ["scheldwoord1", "scheldwoord2", "scheldwoord3"]; // Vervang deze met echte scheldwoorden
+
 if (!playerName) {
   playerName = prompt("Wat is je naam?");
   
@@ -9,7 +12,12 @@ if (!playerName) {
     // Verwijder alles behalve letters en spaties
     playerName = playerName.replace(/[^a-zA-Z\s]/g, '');
     
-    if (playerName.trim() === "") {
+    // Controleer op ongeldige woorden
+    const containsInvalidWord = invalidWords.some(word => playerName.toLowerCase().includes(word.toLowerCase()));
+    
+    if (containsInvalidWord) {
+      alert("De naam bevat ongeldige woorden. Kies een andere naam.");
+    } else if (playerName.trim() === "") {
       alert("De naam kan niet leeg zijn.");
     } else {
       localStorage.setItem("playerName", playerName);
@@ -21,7 +29,6 @@ if (!playerName) {
 } else {
   alert("Welkom terug, " + playerName + "!");
 }
-
 
 const vakjes = document.querySelectorAll(".vakje");
 console.log(vakjes);
@@ -133,7 +140,6 @@ function checkWinner(player) {
 }
 
 function checkDraw() {
-  // Check if all cells are filled and there's no winner
   return [...vakjes].every(vakje => vakje.textContent !== "") && !checkWinner("X") && !checkWinner("O");
 }
 
@@ -148,10 +154,11 @@ function saveScores() {
 }
 
 function updateScoreDisplay() {
-  playerNameElement.textContent = playerName;  // Toon de naam van de speler
-  playerScoreElement.textContent = playerScore; // Toon de score van de speler
-  computerScoreElement.textContent = computerScore; // Toon de score van de computer
+  playerNameElement.textContent = playerName;  
+  playerScoreElement.textContent = playerScore; 
+  computerScoreElement.textContent = computerScore; 
 }
+
 
 
 
