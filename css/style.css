@@ -1,0 +1,71 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header styling */
+header {
+    background-color: #2e3b4e;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+/* Navigatie styling */
+nav {
+    margin-top: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 0 15px;
+    padding: 12px 24px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #45a049;
+}
+
+.bke-btn {
+    background-color: green; 
+}
+
+.bke-btn:hover {
+    background-color:green;
+}
+
+.zeeslag-btn {
+    background-color: #1e90ff;
+}
+
+.zeeslag-btn:hover {
+    background-color: #1c7cd6;
+}
+
+.wam-btn {
+    background-color:brown; 
+}
+
+.wam-btn:hover {
+    background-color: brown;
+}
+
+
+body {
+    margin-top: 40px;
+}
+
