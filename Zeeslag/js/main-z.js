@@ -141,15 +141,15 @@ function placeBoatInRandomBox(bootId, emptyBoxes) {
 }
 
 // Aanval logica (spelers kunnen aanvallen na het plaatsen van boten)
-document.querySelectorAll(".box").forEach((box) => {
-  box.addEventListener("click", function () {
+document.querySelectorAll(".box1").forEach((box1) => {
+  box1.addEventListener("click", function () {
     if (gameStarted && playerTurn) {
       // De speler probeert een vak van de computer te raken
-      if (box.innerHTML.includes("boot") && !box.classList.contains("attacked")) {
+      if (box1.innerHTML.includes("boot") && !box1.classList.contains("attacked")) {
         playerScore++;
         showMessage("Je hebt een boot van de computer geraakt! Score: " + playerScore);
-        box.innerHTML = "";  // Verwijder de boot van de computer
-        box.classList.add("attacked"); // Markeer als aangevallen
+        box1.innerHTML = "";  // Verwijder de boot van de computer
+        box1.classList.add("attacked"); // Markeer als aangevallen
       }
       playerTurn = false;
       setTimeout(computerTurnAttack, 1000); // De computer is nu aan de beurt om een vak van de speler aan te vallen
@@ -160,7 +160,7 @@ document.querySelectorAll(".box").forEach((box) => {
 // Computer beurt om een vak van de speler aan te vallen
 function computerTurnAttack() {
   const boxes = document.querySelectorAll(".box"); 
-  const emptyBoxes = Array.from(boxes).filter(box1 => box1.innerHTML === "" || box1.classList.contains("attacked"));
+  const emptyBoxes = Array.from(boxes).filter(box => box.innerHTML === "" || box.classList.contains("attacked"));
 
   if (emptyBoxes.length < boxes.length) { // Als er nog vakken over zijn die niet aangevallen zijn
     const randomBox = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
