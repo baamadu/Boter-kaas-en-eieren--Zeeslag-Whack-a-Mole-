@@ -10,7 +10,7 @@ function askForPlayerName() {
   playerName = prompt("Wat is je naam?");
   
   if (playerName) {
-    // Verwijder alles behalve letters en spaties
+    
     playerName = playerName.replace(/[^a-zA-Z\s]/g, '');
     
     // Controleer op ongeldige woorden
@@ -18,12 +18,11 @@ function askForPlayerName() {
     
     if (containsInvalidWord) {
       alert("De naam bevat ongeldige woorden. Kies een andere naam.");
-      playerName = ""; // Zet de naam leeg zodat de prompt opnieuw wordt getoond
-      // Vraag opnieuw om een naam totdat deze geldig is
-      askForPlayerName(); // Herhaal totdat een geldige naam wordt ingevoerd
+      playerName = ""; 
+      askForPlayerName(); 
     } else if (playerName.trim() === "") {
       alert("ongeldige naam.");
-      askForPlayerName(); // Herhaal totdat een geldige naam wordt ingevoerd
+      askForPlayerName(); 
     } else {
       localStorage.setItem("playerName", playerName);
       alert("Welkom, " + playerName + "!");
