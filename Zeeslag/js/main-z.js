@@ -8,8 +8,8 @@ let computerBoot3Count = 0;
 let computerBoatCount = 0;
 let playerBoatCount = 0;
 let playerTurn = true;
-let playerScore = 0;  // Score van de speler
-let computerScore = 0;  // Score van de computer
+let playerScore = 0; // Score van de speler
+let computerScore = 0; // Score van de computer
 let gameStarted = false; // Vlag die aangeeft of het spel gestart is (na het plaatsen van boten)
 
 const messageBox = document.getElementById("messagebox");
@@ -79,7 +79,9 @@ document.querySelectorAll(".box").forEach((box) => {
 
       // Controleer of de speler klaar is met plaatsen (max 9 boten in totaal)
       if (boot1Count + boot2Count + boot3Count === 9) {
-        showMessage("Alle boten zijn geplaatst. Nu is het de beurt van de computer.");
+        showMessage(
+          "Alle boten zijn geplaatst. Nu is het de beurt van de computer."
+        );
         playerTurn = false;
         setTimeout(computerTurn, 1000); // Start de computer beurt na 1 seconde vertraging
       }
@@ -94,15 +96,15 @@ document.querySelectorAll(".box").forEach((box) => {
 
 // Computer beurt om boten te plaatsen
 function computerTurn() {
-  const boxes = document.querySelectorAll(".box1"); 
-  const emptyBoxes = Array.from(boxes).filter(box1 => box1.innerHTML === "");
+  const boxes = document.querySelectorAll(".box1");
+  const emptyBoxes = Array.from(boxes).filter((box1) => box1.innerHTML === "");
 
   if (emptyBoxes.length > 0) {
     // Probeer eerst een boot van boot1 te plaatsen (maximaal 2 boten)
     if (computerBoot1Count < 2) {
       placeBoatInRandomBox("boot1", emptyBoxes);
       computerBoot1Count++;
-    } 
+    }
     // Probeer dan een boot van boot2 te plaatsen (maximaal 3 boten)
     else if (computerBoot2Count < 3) {
       placeBoatInRandomBox("boot2", emptyBoxes);
@@ -118,8 +120,10 @@ function computerTurn() {
     if (computerBoatCount < 9) {
       setTimeout(() => computerTurn(), 1000); // Wacht 1 seconde voor de volgende beurt
     } else {
-      showMessage("Alle computer boten zijn geplaatst. Nu kan je de computer boten vernietigen.");
-      gameStarted = true;  // Het spel is nu gestart
+      showMessage(
+        "Alle computer boten zijn geplaatst. Nu kan je de computer boten vernietigen."
+      );
+      gameStarted = true; // Het spel is nu gestart
       playerTurn = true; // Zet de beurt naar speler
     }
   } else {
@@ -130,39 +134,46 @@ function computerTurn() {
 // Plaats een boot van het opgegeven type in een willekeurig leeg vak
 function placeBoatInRandomBox(bootId, emptyBoxes) {
   const randomBox = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
-  const computerBoot = document.querySelector(`#${bootId}`); 
+  const computerBoot = document.querySelector(`#${bootId}`);
   const computerBootClone = computerBoot.cloneNode(true);
-  randomBox.innerHTML = ""; 
+  computerBootClone.classList.add("hidden-boat"); // Voeg de klasse toe om de boot te verbergen
+  randomBox.innerHTML = "";
   randomBox.appendChild(computerBootClone);
   computerBoatCount++;
 
   showMessage(`De computer heeft een boot van ${bootId} geplaatst!`);
-  emptyBoxes.splice(emptyBoxes.indexOf(randomBox), 1); // Verwijder de gebruikte box uit de lijst van lege vakken
+  emptyBoxes.splice(emptyBoxes.indexOf(randomBox), 1);
 }
 
 // Aanval logica (spelers kunnen aanvallen na het plaatsen van boten)
 document.querySelectorAll(".box1").forEach((box1) => {
   box1.addEventListener("click", function () {
     if (gameStarted && playerTurn) {
-      // De speler probeert een vak van de computer te raken
-      if (box1.innerHTML.includes("boot") && !box1.classList.contains("attacked")) {
+      if (
+        box1.innerHTML.includes("boot") &&
+        !box1.classList.contains("attacked")
+      ) {
         playerScore++;
-        showMessage("Je hebt een boot van de computer geraakt! Score: " + playerScore);
-        box1.innerHTML = "";  // Verwijder de boot van de computer
-        box1.classList.add("attacked"); // Markeer als aangevallen
+        document.getElementById('player-score').innerHTML = computerScore
+        showMessage(
+          "Je hebt een boot van de computer geraakt! Score: " + playerScore
+        );
+        
+        box1.querySelector(".hidden-boat")?.classList.remove("hidden-boat"); // Verwijder de klasse om de boot zichtbaar te maken
+        box1.innerHTML = ""; // Verwijder de boot van de computer
+        box1.classList.add("attacked");
       } else {
         showMessage("Je hebt gemist!");
       }
 
-      // Controleer of de speler heeft gewonnen
-      if (playerScore === 9) { // Pas dit aan op basis van het totale aantal boten
+      if (playerScore === 9) {
         showMessage("Gefeliciteerd! Je hebt gewonnen!");
         gameStarted = false;
         return;
       }
 
       playerTurn = false;
-      setTimeout(computerTurnAttack, 1000); // De computer is nu aan de beurt om een vak van de speler aan te vallen
+      setTimeout(computerTurnAttack, 1000);
     }
   });
 });
@@ -170,14 +181,23 @@ document.querySelectorAll(".box1").forEach((box1) => {
 // Computer beurt om een vak van de speler aan te vallen
 function computerTurnAttack() {
   const boxes = document.querySelectorAll(".box"); // Selecteer alle vakken van de speler
-  const attackableBoxes = Array.from(boxes).filter(box => !box.classList.contains("attacked")); // Filter alleen vakken die nog niet zijn aangevallen
+  const attackableBoxes = Array.from(boxes).filter(
+    (box) => !box.classList.contains("attacked")
+  ); // Filter alleen vakken die nog niet zijn aangevallen
 
-  if (attackableBoxes.length > 0) { // Als er nog vakken zijn die kunnen worden aangevallen
-    const randomBox = attackableBoxes[Math.floor(Math.random() * attackableBoxes.length)]; // Kies een willekeurig vak
+  if (attackableBoxes.length > 0) {
+    // Als er nog vakken zijn die kunnen worden aangevallen
+    const randomBox =
+      attackableBoxes[Math.floor(Math.random() * attackableBoxes.length)]; // Kies een willekeurig vak
 
-    if (randomBox.innerHTML.includes("boot")) { // Als het vak een boot bevat
+    if (randomBox.innerHTML.includes("boot")) {
+      // Als het vak een boot bevat
       computerScore++;
-      showMessage("De computer heeft een boot van jou geraakt! Score van de computer: " + computerScore);
+      document.getElementById('computer-score').innerHTML = computerScore;
+      showMessage(
+        "De computer heeft een boot van jou geraakt! Score van de computer: " +
+          computerScore
+      );
       randomBox.innerHTML = ""; // Verwijder de boot van de speler
     } else {
       showMessage("De computer heeft gemist!");
@@ -186,7 +206,8 @@ function computerTurnAttack() {
     randomBox.classList.add("attacked"); // Markeer het vak als aangevallen
 
     // Controleer of de computer heeft gewonnen
-    if (computerScore === 9) { // Pas dit aan op basis van het totale aantal boten
+    if (computerScore === 9) {
+      // Pas dit aan op basis van het totale aantal boten
       showMessage("De computer heeft gewonnen!");
       gameStarted = false;
       return;
