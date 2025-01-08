@@ -150,7 +150,17 @@ document.querySelectorAll(".box1").forEach((box1) => {
         showMessage("Je hebt een boot van de computer geraakt! Score: " + playerScore);
         box1.innerHTML = "";  // Verwijder de boot van de computer
         box1.classList.add("attacked"); // Markeer als aangevallen
+      } else {
+        showMessage("Je hebt gemist!");
       }
+
+      // Controleer of de speler heeft gewonnen
+      if (playerScore === 9) { // Pas dit aan op basis van het totale aantal boten
+        showMessage("Gefeliciteerd! Je hebt gewonnen!");
+        gameStarted = false;
+        return;
+      }
+
       playerTurn = false;
       setTimeout(computerTurnAttack, 1000); // De computer is nu aan de beurt om een vak van de speler aan te vallen
     }
@@ -159,17 +169,31 @@ document.querySelectorAll(".box1").forEach((box1) => {
 
 // Computer beurt om een vak van de speler aan te vallen
 function computerTurnAttack() {
-  const boxes = document.querySelectorAll(".box"); 
-  const emptyBoxes = Array.from(boxes).filter(box => box.innerHTML === "" || box.classList.contains("attacked"));
+  const boxes = document.querySelectorAll(".box"); // Selecteer alle vakken van de speler
+  const attackableBoxes = Array.from(boxes).filter(box => !box.classList.contains("attacked")); // Filter alleen vakken die nog niet zijn aangevallen
 
-  if (emptyBoxes.length < boxes.length) { // Als er nog vakken over zijn die niet aangevallen zijn
-    const randomBox = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
-    if (randomBox.innerHTML.includes("boot") && !randomBox.classList.contains("attacked")) {
+  if (attackableBoxes.length > 0) { // Als er nog vakken zijn die kunnen worden aangevallen
+    const randomBox = attackableBoxes[Math.floor(Math.random() * attackableBoxes.length)]; // Kies een willekeurig vak
+
+    if (randomBox.innerHTML.includes("boot")) { // Als het vak een boot bevat
       computerScore++;
       showMessage("De computer heeft een boot van jou geraakt! Score van de computer: " + computerScore);
-      randomBox.innerHTML = "";  // Verwijder de boot van de speler
-      randomBox.classList.add("attacked"); // Markeer als aangevallen
+      randomBox.innerHTML = ""; // Verwijder de boot van de speler
+    } else {
+      showMessage("De computer heeft gemist!");
     }
-    playerTurn = true;
+
+    randomBox.classList.add("attacked"); // Markeer het vak als aangevallen
+
+    // Controleer of de computer heeft gewonnen
+    if (computerScore === 9) { // Pas dit aan op basis van het totale aantal boten
+      showMessage("De computer heeft gewonnen!");
+      gameStarted = false;
+      return;
+    }
+
+    playerTurn = true; // Geef de beurt terug aan de speler
+  } else {
+    showMessage("Geen vakken meer om aan te vallen!");
   }
 }
