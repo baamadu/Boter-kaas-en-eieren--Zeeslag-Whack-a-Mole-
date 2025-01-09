@@ -3,7 +3,9 @@ console.log("Main loaded");
 let playerName = localStorage.getItem("playerName");
 
 // Array van ongeldige woorden (bijvoorbeeld scheldwoorden)
-const invalidWords = ["kanker", "fuck", "mongool", "shit"]; // Vervang deze met echte scheldwoorden
+const invalidWords = [
+  "lul", "klootzak", "kanker", "eikel", "kak", "domkop", "asociale", "loser", 
+  "debiel", "tut", "sukkel", "gek", "stomkop", "flikker", "prutser"]; // Vervang deze met echte scheldwoorden
 
 // Functie voor het vragen en valideren van de naam
 function askForPlayerName() {
