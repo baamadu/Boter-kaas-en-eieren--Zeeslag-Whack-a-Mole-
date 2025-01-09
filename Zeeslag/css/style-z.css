@@ -7,7 +7,7 @@
   color: teal;
   font-size: 150%;
   padding: 1px;
-  width: 50vmin; /* Zorg ervoor dat de breedte van het bord niet groter wordt dan de container */
+  width: 500px; /* Zorg ervoor dat de breedte van het bord niet groter wordt dan de container */
   margin: 0 auto;
   position: relative;
   overflow: hidden; /* Zorgt ervoor dat inhoud niet buiten het bord kan komen */
@@ -25,7 +25,7 @@
   z-index: 1;
 }
 
-.box {
+.box, .box1 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,24 +34,10 @@
   text-align: center;
   aspect-ratio: 1;
   background-color: rgb(23, 165, 217); /* juiste achtergrondkleur */
+  transition: background-color 0.2s ease-in-out; /* voeg een transitieregeling toe */
 }
 
-.box:hover {
-  background-color: white; /* verandert de achtergrond naar wit bij hover */
-}
-
-.box1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid rgb(23, 165, 217);
-  padding: 10px;
-  text-align: center;
-  aspect-ratio: 1;
-  background-color: rgb(23, 165, 217); /* juiste achtergrondkleur */
-}
-
-.box1:hover {
+.box:hover, .box1:hover {
   background-color: white; /* verandert de achtergrond naar wit bij hover */
 }
 
@@ -150,169 +136,8 @@
   z-index: 0;
 }
 
-.box:nth-child(1) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(2) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(3) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(4) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(5) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(6) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(7) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(8) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(9) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
 
-.box:nth-child(10) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(11) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(12) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(13) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(14) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(15) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(16) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(17) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(18) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(19) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box:nth-child(20) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
 
-.box1:nth-child(1) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(2) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(3) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(4) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(5) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(6) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(7) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-
-.box1:nth-child(8) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(9) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(10) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(11) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(12) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(13) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(14) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(15) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(16) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(17) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(18) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(19) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
-.box1:nth-child(20) {
-  background-color: rgb(23, 165, 217);
-  color: white;
-}
 
 .b-image {
   position: fixed;

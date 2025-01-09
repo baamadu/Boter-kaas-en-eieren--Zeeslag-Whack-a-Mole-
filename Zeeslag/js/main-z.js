@@ -10,19 +10,33 @@ let playerBoatCount = 0;
 let playerTurn = true;
 let playerScore = 0; // Score van de speler
 let computerScore = 0; // Score van de computer
-let gameStarted = false; // Vlag die aangeeft of het spel gestart is (na het plaatsen van boten)
+let playerName = prompt('Wat is je naam?');
+
+if (playerName === playerName) {
+  console.log('De speler heet' + playerName);
+}
+ 
 
 const messageBox = document.getElementById("messagebox");
 const messageText = document.getElementById("message-text");
+
+function updateScore() {
+  scoreBord.textContent = `Score: ${score}`;
+}
 
 function showMessage(msg) {
   messageText.textContent = msg;
   messageBox.classList.add("show");
   setTimeout(() => {
     messageBox.classList.remove("show");
-  }, 3000); // Verberg de messagebox na 3 seconden
+  }, 5000); // Verberg de messagebox na 5 seconden
 }
 
+function updateScoreAndShowMessage(){
+score++;
+updateScore()
+showMessageFunction('Je hebt een punt!');
+}
 // Selecteer een boot
 document.querySelectorAll(".bootje").forEach((boot) => {
   boot.addEventListener("click", function () {
@@ -154,7 +168,7 @@ document.querySelectorAll(".box1").forEach((box1) => {
         !box1.classList.contains("attacked")
       ) {
         playerScore++;
-        document.getElementById('player-score').innerHTML = computerScore
+        document.getElementById('player-score').innerHTML = playerScore
         showMessage(
           "Je hebt een boot van de computer geraakt! Score: " + playerScore
         );
@@ -173,7 +187,7 @@ document.querySelectorAll(".box1").forEach((box1) => {
       }
 
       playerTurn = false;
-      setTimeout(computerTurnAttack, 1000);
+      setTimeout(computerTurnAttack, 2000);
     }
   });
 });
