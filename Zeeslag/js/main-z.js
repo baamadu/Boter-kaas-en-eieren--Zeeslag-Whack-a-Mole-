@@ -10,12 +10,7 @@ let playerBoatCount = 0;
 let playerTurn = true;
 let playerScore = 0; // Score van de speler
 let computerScore = 0; // Score van de computer
-let playerName = prompt('Wat is je naam?');
-
-if (playerName === playerName) {
-  console.log('De speler heet' + playerName);
-}
- 
+let gameStarted = false; // Vlag die aangeeft of het spel gestart is (na het plaatsen van boten)
 
 const messageBox = document.getElementById("messagebox");
 const messageText = document.getElementById("message-text");
