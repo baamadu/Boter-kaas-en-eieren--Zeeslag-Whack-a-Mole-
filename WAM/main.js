@@ -130,5 +130,4 @@ setInterval(showMole, Math.floor(Math.random() * 3000) + 2000);
 
 askName();
 
-// Initialiseer het bord met 3x3
 createCircles(3);
