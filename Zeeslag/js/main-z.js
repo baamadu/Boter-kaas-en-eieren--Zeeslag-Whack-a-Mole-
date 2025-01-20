@@ -154,7 +154,7 @@ function placeBoatInRandomBox(bootId, emptyBoxes) {
   emptyBoxes.splice(emptyBoxes.indexOf(randomBox), 1);
 }
 
-// Aanval logica (spelers kunnen aanvallen na het plaatsen van boten)
+// Aanval logica spelers kunnen aanvallen na het plaatsen van boten
 document.querySelectorAll(".box1").forEach((box1) => {
   box1.addEventListener("click", function () {
     if (gameStarted && playerTurn) {
@@ -206,10 +206,12 @@ function computerTurnAttack() {
       showMessage(
         "De computer heeft een boot van jou geraakt! Score van de computer: " +
           computerScore
+        
       );
       randomBox.innerHTML = ""; // Verwijder de boot van de speler
     } else {
       showMessage("De computer heeft gemist!");
+      console.log('je hebt gemist')
     }
 
     randomBox.classList.add("attacked"); // Markeer het vak als aangevallen
@@ -220,6 +222,7 @@ function computerTurnAttack() {
       showMessage("De computer heeft gewonnen!");
       gameStarted = false;
       return;
+      console.log('je hebt gewonnen')
     }
 
     playerTurn = true; // Geef de beurt terug aan de speler
@@ -227,3 +230,16 @@ function computerTurnAttack() {
     showMessage("Geen vakken meer om aan te vallen!");
   }
 }
+
+const toggleButton = document.getElementById('toggleButton');
+const toggleText = document.getElementById('toggleText');
+
+toggleButton.addEventListener('click', () => {
+    if (toggleText.style.display === 'none' || toggleText.style.display === '') {
+        toggleText.style.display = 'block';
+        toggleButton.textContent = 'Verberg tekst';
+    } else {
+        toggleText.style.display = 'none';
+        toggleButton.textContent = 'Spelregels';
+    }
+});
